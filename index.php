@@ -25,7 +25,7 @@ function checkDelete(){
     return confirm('Are you sure you want to delete this?');
 }
 	</script>
-	<link rel="stylesheet" type="text/css" href="style.css"> 
+	<link rel="stylesheet" type="text/css" href="assets\style.css"> 
 	<style type="text/css">
 		td, th {
 			border: 1px solid #939393;
@@ -66,10 +66,10 @@ function checkDelete(){
 <div id="container">	
 	<header><h2> My personal blog </h2></header>
 	<nav><ul>
-		<li><a href="index.php"><img class="linkImages" src="home.jpg"></a></li>
+		<li><a href="index.php"><img class="linkImages" src="assets\home.jpg"></a></li>
 <?php
 	if (isset($_SESSION["CURRENT_USER"])) {
-		echo '<li id="hide"><a href="Upload_news.php"><img class="linkImages hover" src="write_new.png"><span class="textShow">Upload news</span></a></li>';
+		echo '<li id="hide"><a href="Upload_news.php"><img class="linkImages hover" src="assets\write_new.png"><span class="textShow">Upload news</span></a></li>';
 		echo '<li class="rightLinks"><a class="blue" href="Logout.php">LOG OUT</a></li>';
 	}
 	else {
@@ -108,12 +108,12 @@ while($row = mysqli_fetch_assoc($result_home))
 	<td>' . $row['Category'] . '</td>
 	<td>' . $row['title'] . '</td>
 	<td>' . $row['last edited'] . '</td>
-	<td><a href="article.php?id=' . $row['ID'] . '"><img src="read.png"></a></td>';
+	<td><a href="article.php?id=' . $row['ID'] . '"><img src="assets\read.png"></a></td>';
 	
 	if (isset($_SESSION['CURRENT_USER'])) {
 
-	echo '<td><a href="edit.php?id=' . $row['ID'] . '"><img src="edit.png"></a></td>
-	<td><a href="delete.php?id=' . $row['ID'] . '" onclick="return checkDelete()"><img class="deleteButton" src="delete.jpg"></a></td>
+	echo '<td><a href="editArt.php?id=' . $row['ID'] . '&category=' . $row['Category'] . '"><img src="assets\edit.png"></a></td>
+	<td><a href="delete.php?id=' . $row['ID'] . '" onclick="return checkDelete()"><img class="deleteButton" src="assets\delete.jpg"></a></td>
 	</tr>';
 	}
 } 
@@ -131,8 +131,8 @@ while($row = mysqli_fetch_assoc($result_home))
 	echo '<tr>
 	<td><a href="index.php?Category=' . $cat['Category'] . '">' . $cat['Category'] . '</a></td>';
 	if (isset($_SESSION["CURRENT_USER"])) {
-		echo '<td><a href="edit.php?Category=' . $cat['Category'] . '"><img src="edit.png"></a></td>
-		<td><a href="delete.php?Category=' . $cat['Category'] . '" onclick="return checkDelete()"><img class="deleteButton" src="delete.jpg"></a></td>
+		echo '<td><a href="editCat.php?Category=' . $cat['Category'] . '"><img src="assets\edit.png"></a></td>
+		<td><a href="delete.php?Category=' . $cat['Category'] . '" onclick="return checkDelete()"><img class="deleteButton" src="assets\delete.jpg"></a></td>
 		</tr>';	
 	}
 	 

@@ -1,5 +1,6 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
+session_start();
 include 'BD.php';
 $massage = "";
 if(isset($_POST["pass"]) || isset($_POST["username"])){
@@ -12,8 +13,9 @@ if(strlen($_POST["pass"]) > 0 && strlen($_POST["username"]) > 0 && $_POST["pass"
 
   $sign_in = mysqli_query($con, "INSERT INTO users (`username`, `password`) VALUES ('$username', '$hash_pass')");
   if (mysqli_affected_rows($con) > 0) {
-	  header('Location: login.php');
-  }
+  	$_SESSION["CURRENT_USER"] = $_POST["username"];
+	  header('Location: index.php');
+ }
 
 }
 ?>
@@ -22,7 +24,8 @@ if(strlen($_POST["pass"]) > 0 && strlen($_POST["username"]) > 0 && $_POST["pass"
 <head>
 	<title>SING IN</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="assets\style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<style type="text/css">
 		#container {
 			background: none;
@@ -32,28 +35,52 @@ if(strlen($_POST["pass"]) > 0 && strlen($_POST["username"]) > 0 && $_POST["pass"
 			margin: 7px;
 			}
 		.borderStrong {
-				border: 1px solid #000000
+			border: 1px solid #000000
 			}
+		#lengthCheck {
+			visibility: hidden;
+		}	
 	</style>
 </head>
 <body>
 <div id="container">
 <header> <h2>Sign in to My blog</h2> </header>
 	<nav> <ul>
-		<li class="leftLinks bigLinks"><a href="index.php"><img class="linkImages borderStrong" src="home.jpg"></a></li>
+		<li class="leftLinks bigLinks"><a href="index.php"><img class="linkImages borderStrong" src="assets\home.jpg"></a></li>
 		<li class="rightLinks bigLinks"><a class="blue" href="login.php">LOG IN</a></li>
 		
 		</ul>
 	</nav>
 		<form method="post" action="sign_in.php" class="usersForm">
 			<p>Username:</p> <input type="text" name="username">
-			<p>Password:</p> <input type="password" name="pass">
-			<p>Confirm Pass:</p> <input type="password" name="cpass"></br>
-			<input type="submit" value="SIGN IN" class="button">
+			<p>Password:</p> <input type="password" id="pass" name="pass">
+			<p id="lengthCheck">Must be at least 8 characters!</p>
+			<p>Confirm Pass:</p> <input type="password" id="cpass" name="cpass"></br>
+			<input type="submit" value="SIGN IN" id="signInButton" class="button" disabled>
 			<?php if(is_string($massage) && strlen($massage) > 0) {
 				echo '<p class = massage>' . $massage . '</p>';
 			} ?>
 			</form>
 		</div>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#pass").keypress(function() {
+					if($(this).val().length <= 6 ) {
+						$("#lengthCheck").css("visibility", "visible");
+					} else {
+						$("#lengthCheck").css("visibility", "hidden");
+						$("#cpass").keypress(function() {
+							var str = $('input[name="cpass"]').val();
+							var str = str.trim();
+							if (str.length > 7 ) {
+								$("#signInButton").prop("disabled", false);
+							} else {
+								$("#signInButton").prop("disabled", true);
+							}
+						})	
+					}
+				})
+			})
+		</script>
 </body>
 </html>

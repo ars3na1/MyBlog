@@ -22,7 +22,7 @@ if (isset($_POST["username"]) && isset($_POST["pass"])) {
 	<head>
 		<title>My blog- log in</title>
 		<meta charset="UTF-8" />
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="assets\style.css">
 		<style type="text/css">
 			#container{
 				background: none;
@@ -40,7 +40,7 @@ if (isset($_POST["username"]) && isset($_POST["pass"])) {
 	<div id="container">
 		<header><h2>LOG IN</h2></header>
 		<nav> <ul>
-		<li class="leftLinks bigLinks"><a href="index.php"><img class="linkImages borderStrong" src="home.jpg"></a></li>
+		<li class="leftLinks bigLinks"><a href="index.php"><img class="linkImages borderStrong" src="assets\home.jpg"></a></li>
 		<li class="rightLinks bigLinks"><a class="blue" href="sign_in.php">SIGN IN</a></li>
 		</ul>
 		</nav>

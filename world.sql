@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time:  8 май 2019 в 15:13
--- Версия на сървъра: 10.1.26-MariaDB
+-- Generation Time: Oct 18, 2019 at 02:02 PM
+-- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.0.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `blog articles`
+-- Table structure for table `blog articles`
 --
 
 CREATE TABLE `blog articles` (
@@ -37,19 +37,19 @@ CREATE TABLE `blog articles` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Схема на данните от таблица `blog articles`
+-- Dumping data for table `blog articles`
 --
 
 INSERT INTO `blog articles` (`ID`, `Category`, `title`, `text`, `last edited`) VALUES
-(1, 'Crime', 'Lorem Ipsum', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nisi metus, tristique nec tempor in, pretium eu est. Ut nunc arcu, tristique a elit a, tempus ornare tortor. Etiam laoreet viverra consectetur. Vestibulum tincidunt aliquet sodales. Pellentesque auctor neque a nisi placerat bibendum. Nunc vitae ipsum sed odio convallis dictum. Mauris ultricies orci ut iaculis tempor. Pellentesque placerat tincidunt sapien, in egestas libero. Mauris suscipit purus quis quam fermentum suscipit.\r\n\r\nNulla sapien leo, ultricies sed augue eget, tempor facilisis velit. Aenean eget faucibus arcu, egestas faucibus urna. Aliquam elementum dolor at sem rutrum, ut congue nulla gravida. Maecenas consectetur at turpis nec mattis. Vivamus sodales tortor eget placerat consequat. Nulla quis quam placerat, faucibus tellus eget, auctor sapien. Suspendisse sed tellus vel lectus vehicula posuere. In in pharetra tellus. Aliquam tempus feugiat leo, et venenatis metus bibendum sit amet. Nulla in dictum felis. Praesent vel facilisis lectus, pharetra dignissim libero. Proin mattis lobortis nibh sit amet tincidunt. In hac habitasse platea dictumst. Sed luctus a ipsum id pulvinar. Curabitur aliquet semper odio, id dignissim sapien aliquam vel. Proin id purus euismod nisi ultrices lacinia faucibus eget leo.\r\n\r\nEtiam diam mi, auctor a tortor quis, dapibus sodales ipsum. Sed venenatis orci blandit nisi pulvinar, sit amet pellentesque nibh fringilla. Quisque interdum, tellus ac bibendum gravida, eros metus tincidunt ex, consequat elementum elit odio at metus. Cras ut est luctus, bibendum justo a, lacinia dolor. Suspendisse potenti. Nam ut leo eu arcu mattis dapibus. Phasellus pretium dignissim orci, quis fringilla tortor tempus molestie. Nulla mattis vehicula nulla sit amet accumsan. Mauris porttitor consequat ex, non faucibus urna imperdiet a. Mauris vel tincidunt tellus, a tempus nunc. Proin non ornare neque. Curabitur ullamcorper lobortis sem. Morbi tempus mauris a tellus egestas, eget luctus ante laoreet. Cras sit amet libero ante.\r\n\r\nSed consequat convallis feugiat. Duis sodales sit amet dolor sed feugiat. Morbi ut fringilla elit, eu feugiat sem. Donec feugiat arcu nec magna dignissim auctor non ut orci. Nullam non feugiat felis. Maecenas tempus hendrerit auctor. Pellentesque et est congue, pellentesque quam eu, molestie mauris. Proin ac consectetur massa, iaculis consectetur mauris. Praesent auctor elit eleifend risus venenatis sollicitudin. Fusce imperdiet porta mi, et elementum nisl sollicitudin quis. Fusce est turpis, consectetur nec ipsum a, ultrices cursus leo. In blandit enim et sem vehicula pretium. Pellentesque eu libero tristique, placerat felis sit amet, eleifend nisl.\r\n\r\nProin a massa massa. Donec commodo lacus metus. Suspendisse at ante eu tortor accumsan bibendum. Aliquam mattis libero sed feugiat malesuada. Maecenas justo massa, consequat sed laoreet non, auctor et sem. Suspendisse scelerisque aliquet quam id pulvinar. Curabitur dignissim risus eget ex fermentum varius. Curabitur aliquet ac ex vel porttitor. Praesent scelerisque nibh at quam rutrum pellentesque. ', '2017-11-09 12:46:59'),
+(1, 'Crime', 'Lorem Ipsum', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nisi metus, tristique nec tempor in, pretium eu est. Ut nunc arcu, tristique a elit a, tempus ornare tortor. Etiam laoreet viverra consectetur. Vestibulum tincidunt aliquet sodales. Pellentesque auctor neque a nisi placerat bibendum. Nunc vitae ipsum sed odio convallis dictum. Mauris ultricies orci ut iaculis tempor. Pellentesque placerat tincidunt sapien, in egestas libero. Mauris suscipit purus quis quam fermentum suscipit.<br>\r\n\r\nNulla sapien leo, ultricies sed augue eget, tempor facilisis velit. Aenean eget faucibus arcu, egestas faucibus urna. Aliquam elementum dolor at sem rutrum, ut congue nulla gravida. Maecenas consectetur at turpis nec mattis. Vivamus sodales tortor eget placerat consequat. Nulla quis quam placerat, faucibus tellus eget, auctor sapien. Suspendisse sed tellus vel lectus vehicula posuere. In in pharetra tellus. Aliquam tempus feugiat leo, et venenatis metus bibendum sit amet. Nulla in dictum felis. Praesent vel facilisis lectus, pharetra dignissim libero. Proin mattis lobortis nibh sit amet tincidunt. In hac habitasse platea dictumst. Sed luctus a ipsum id pulvinar. Curabitur aliquet semper odio, id dignissim sapien aliquam vel. Proin id purus euismod nisi ultrices lacinia faucibus eget leo.<br>\r\n\r\nEtiam diam mi, auctor a tortor quis, dapibus sodales ipsum. Sed venenatis orci blandit nisi pulvinar, sit amet pellentesque nibh fringilla. Quisque interdum, tellus ac bibendum gravida, eros metus tincidunt ex, consequat elementum elit odio at metus. Cras ut est luctus, bibendum justo a, lacinia dolor. Suspendisse potenti. Nam ut leo eu arcu mattis dapibus. Phasellus pretium dignissim orci, quis fringilla tortor tempus molestie. Nulla mattis vehicula nulla sit amet accumsan. Mauris porttitor consequat ex, non faucibus urna imperdiet a. Mauris vel tincidunt tellus, a tempus nunc. Proin non ornare neque. Curabitur ullamcorper lobortis sem. Morbi tempus mauris a tellus egestas, eget luctus ante laoreet. Cras sit amet libero ante.<br>\r\n\r\nSed consequat convallis feugiat. Duis sodales sit amet dolor sed feugiat. Morbi ut fringilla elit, eu feugiat sem. Donec feugiat arcu nec magna dignissim auctor non ut orci. Nullam non feugiat felis. Maecenas tempus hendrerit auctor. Pellentesque et est congue, pellentesque quam eu, molestie mauris. Proin ac consectetur massa, iaculis consectetur mauris. Praesent auctor elit eleifend risus venenatis sollicitudin. Fusce imperdiet porta mi, et elementum nisl sollicitudin quis. Fusce est turpis, consectetur nec ipsum a, ultrices cursus leo. In blandit enim et sem vehicula pretium. Pellentesque eu libero tristique, placerat felis sit amet, eleifend nisl.<br>\r\n\r\nProin a massa massa. Donec commodo lacus metus. Suspendisse at ante eu tortor accumsan bibendum. Aliquam mattis libero sed feugiat malesuada. Maecenas justo massa, consequat sed laoreet non, auctor et sem. Suspendisse scelerisque aliquet quam id pulvinar. Curabitur dignissim risus eget ex fermentum varius. Curabitur aliquet ac ex vel porttitor. Praesent scelerisque nibh at quam rutrum pellentesque. ', '2017-11-09 12:46:59'),
 (2, 'Ordinary', 'Lorem Ipsum', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nisi metus, tristique nec tempor in, pretium eu est. Ut nunc arcu, tristique a elit a, tempus ornare tortor. Etiam laoreet viverra consectetur. Vestibulum tincidunt aliquet sodales. Pellentesque auctor neque a nisi placerat bibendum. Nunc vitae ipsum sed odio convallis dictum. Mauris ultricies orci ut iaculis tempor. Pellentesque placerat tincidunt sapien, in egestas libero. Mauris suscipit purus quis quam fermentum suscipit.', '2017-11-09 12:48:19'),
-(3, 'Crime', 'Какво е Lorem Ipsum?', 'Lorem Ipsum е елементарен примерен текст, използван в печатарската и типографската индустрия. Lorem Ipsum е индустриален стандарт от около 1500 година, когато неизвестен печатар взема няколко печатарски букви и ги разбърква, за да напечата с тях книга с примерни шрифтове. Този начин не само е оцелял повече от 5 века, но е навлязъл и в публикуването на електронни издания като е запазен почти без промяна. Популяризиран е през 60те години на 20ти век със издаването на Letraset листи, съдържащи Lorem Ipsum пасажи, популярен е и в наши дни във софтуер за печатни издания като Aldus PageMaker, който включва различни версии на Lorem Ipsum.', '2017-11-11 10:57:34'),
+(3, 'Crime', 'Какво е Lorem Ipsum?', 'Lorem Ipsum е елементарен примерен текст, използван в печатарската и типографската индустрия. Lorem Ipsum е индустриален стандарт от около 1500 година, когато неизвестен печатар взема няколко печатарски букви и ги разбърква, за да напечата с тях книга с примерни шрифтове. Този начин не само е оцелял повече от 5 века, но е навлязъл и в публикуването на електронни издания като е запазен почти без промяна.<br> Популяризиран е през 60те години на 20ти век със издаването на Letraset листи, съдържащи Lorem Ipsum пасажи, популярен е и в наши дни във софтуер за печатни издания като Aldus PageMaker, който включва различни версии на Lorem Ipsum.', '2017-11-11 10:57:34'),
 (4, 'Ordinary', 'Откъде произлиза Lorem Ipsum?', 'Противно на всеобщото вярване, Lorem Ipsum не е просто случаен текст. Неговите корени са в класическата Латинска литература от 45г.пр.Хр., което прави преди повече от 2000 години. Richard McClintock, професор по Латински от колежа Hampden-Sydney College във Вирджиния, изучавайки една от най-неясните латински думи consectetur в един от пасажите на Lorem Ipsum, и търсейки цитати на думата в класическата литература, открива точния източник. Lorem Ipsum е намерен в секции 1.10.32 и 1.10.33 от de Finibus Bonorum et Malorum (Крайностите на Доброто и Злото) от Цицерон, написан през 45г.пр.Хр. Тази книга е трактат по теория на етиката, много популярна през Ренесанса. Първият ред на Lorem Ipsum идва от ред, намерен в секция 1.10.32.', '2017-11-11 11:02:59');
 
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `city`
+-- Table structure for table `city`
 --
 
 CREATE TABLE `city` (
@@ -61,7 +61,7 @@ CREATE TABLE `city` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Схема на данните от таблица `city`
+-- Dumping data for table `city`
 --
 
 INSERT INTO `city` (`ID`, `Name`, `CountryCode`, `District`, `Population`) VALUES
@@ -4151,7 +4151,7 @@ INSERT INTO `city` (`ID`, `Name`, `CountryCode`, `District`, `Population`) VALUE
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `country`
+-- Table structure for table `country`
 --
 
 CREATE TABLE `country` (
@@ -4173,7 +4173,7 @@ CREATE TABLE `country` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Схема на данните от таблица `country`
+-- Dumping data for table `country`
 --
 
 INSERT INTO `country` (`Code`, `Name`, `Continent`, `Region`, `SurfaceArea`, `IndepYear`, `Population`, `LifeExpectancy`, `GNP`, `GNPOld`, `LocalName`, `GovernmentForm`, `HeadOfState`, `Capital`, `Code2`) VALUES
@@ -4420,7 +4420,7 @@ INSERT INTO `country` (`Code`, `Name`, `Continent`, `Region`, `SurfaceArea`, `In
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `countrylanguage`
+-- Table structure for table `countrylanguage`
 --
 
 CREATE TABLE `countrylanguage` (
@@ -4431,7 +4431,7 @@ CREATE TABLE `countrylanguage` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Схема на данните от таблица `countrylanguage`
+-- Dumping data for table `countrylanguage`
 --
 
 INSERT INTO `countrylanguage` (`CountryCode`, `Language`, `IsOfficial`, `Percentage`) VALUES
@@ -5423,7 +5423,7 @@ INSERT INTO `countrylanguage` (`CountryCode`, `Language`, `IsOfficial`, `Percent
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `loremipsum_comments`
+-- Table structure for table `loremipsum_comments`
 --
 
 CREATE TABLE `loremipsum_comments` (
@@ -5433,7 +5433,7 @@ CREATE TABLE `loremipsum_comments` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Схема на данните от таблица `loremipsum_comments`
+-- Dumping data for table `loremipsum_comments`
 --
 
 INSERT INTO `loremipsum_comments` (`ID`, `name`, `comment`) VALUES
@@ -5442,7 +5442,7 @@ INSERT INTO `loremipsum_comments` (`ID`, `name`, `comment`) VALUES
 -- --------------------------------------------------------
 
 --
--- Структура на таблица `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -5451,11 +5451,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Схема на данните от таблица `users`
+-- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`username`, `password`) VALUES
 ('111', 'fb131bc57a477c8c9d068f1ee5622ac304195a77164ccc2d75d82dfe1a727ba8d674ed87f96143b2b416aacefb555e3045c356faa23e6d21de72b85822e39fdd'),
+('4567', 'ebbedf2f05cf9e160da1f24314a0a71afb2b319fee6676605e2890bf15c220c390ca053fcbe8214701c440afe1487485027785c9e507c51fb046b3e02118174c'),
+('987', 'bb469369c35040765bec68d409faa6957fee1f4b9029daa5c862e467b61fa53490f611c4680d5880c0631c9737e11a01b45c2335311ad7264a14bbd767c51807'),
 ('abv', '8b4567d808a674fe2593a96e9213a8df8e993acde29bf327a12c7584c5c7b5a27bac35c8ebaec43a75d810e0177a36506b3f2d85ea999b04656b78e470e7e490');
 
 --
@@ -5515,7 +5517,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `blog articles`
 --
 ALTER TABLE `blog articles`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `city`
@@ -5524,17 +5526,17 @@ ALTER TABLE `city`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4080;
 
 --
--- Ограничения за дъмпнати таблици
+-- Constraints for dumped tables
 --
 
 --
--- Ограничения за таблица `city`
+-- Constraints for table `city`
 --
 ALTER TABLE `city`
   ADD CONSTRAINT `city_ibfk_1` FOREIGN KEY (`CountryCode`) REFERENCES `country` (`Code`);
 
 --
--- Ограничения за таблица `countrylanguage`
+-- Constraints for table `countrylanguage`
 --
 ALTER TABLE `countrylanguage`
   ADD CONSTRAINT `countryLanguage_ibfk_1` FOREIGN KEY (`CountryCode`) REFERENCES `country` (`Code`);

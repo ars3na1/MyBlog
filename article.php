@@ -3,9 +3,9 @@
 require_once 'BD.php';
 $id = mysqli_escape_string($con, $_GET["id"]);
 
-$get_comment=mysqli_query($con, "SELECT `name`, `comment` FROM `loremipsum_comments` WHERE `id`='$id'");
-$text=mysqli_query($con, "SELECT `title`,`text` FROM `blog articles` WHERE `id`='$id'");
-$article=mysqli_fetch_assoc($text);
+$get_comment = mysqli_query($con, "SELECT `name`, `comment` FROM `loremipsum_comments` WHERE `id`='$id'");
+$text = mysqli_query($con, "SELECT `title`,`text` FROM `blog articles` WHERE `id`='$id'");
+$article = mysqli_fetch_assoc($text);
 
 ?>
 <html>
@@ -15,11 +15,12 @@ $article=mysqli_fetch_assoc($text);
 		?>
 		</title>
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="style.css">
+		<link rel="stylesheet" type="text/css" href="assets\style.css">
 		<style type="text/css">
 			h1 {
-				text-align: center;
-				margin: 20px;
+				margin: 0 0 20px;
+				padding: 0;
+				font-size: 30px;
 			}
 			form {
 				margin: 15px;
@@ -42,6 +43,24 @@ $article=mysqli_fetch_assoc($text);
 			.comments {
 				margin-bottom: 45px;
 			}
+			#picture {
+				display: inline-block; 
+				width: 300px;
+				height: 300px;
+				float: left;
+				border-radius: 50%;
+				shape-outside: circle();			
+				margin: 50px 15px 30px 0px;
+			}
+			#article {
+				text-align: justify; 
+				margin: 0;
+				padding: 0;
+				line-height: 22px;
+			}
+			aside {
+				clear: both;
+			}
 		</style>
 	</head>
 	<body>
@@ -50,17 +69,18 @@ $article=mysqli_fetch_assoc($text);
 				<h2>My blog</h2>
 				</header>
 				<nav>
-				<a href='index.php'><img class="linkImages" src="home.jpg"></a>	
+				<a href='index.php'><img class="linkImages" src="assets\home.jpg"></a>	
 				</nav>
 			<article>
+				<img <?php echo 'src="artPictures\\' . $id . '.jpg"'?> id="picture">
 				<h1>
 		<?php echo $article['title'];
 		?>
 				</h1>
-				<p>
+				<div id="article">
 				<?php echo $article['text'];
 				?>
-				</p>
+				</div>
 			</article>
 			<aside>			
 			<form method="post" action="comment.php?id=<?php echo $id?>">

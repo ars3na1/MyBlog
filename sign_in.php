@@ -7,11 +7,12 @@ if(isset($_POST["pass"]) || isset($_POST["username"])){
   $massage = "Username is already taken or your password confirmation is wrong!";
 }
 if(strlen($_POST["pass"]) > 0 && strlen($_POST["username"]) > 0 && $_POST["pass"] == $_POST["cpass"]) {
-  $username = mysqli_escape_string($con, $_POST["username"]);
-  $pass = mysqli_escape_string($con, $_POST["pass"]);
-  $hash_pass = hash('sha512', $pass);
+  $stmt = $con->prepare("INSERT INTO users (`username`, `password`) VALUES (?, ?)");
+  $stmt->bind_param("ss", $username, $pass);
 
-  $sign_in = mysqli_query($con, "INSERT INTO users (`username`, `password`) VALUES ('$username', '$hash_pass')");
+  $username = $_POST["username"];
+  $pass = hash('sha512', $_POST["pass"]);
+  $stmt->execute();
   if (mysqli_affected_rows($con) > 0) {
   	$_SESSION["CURRENT_USER"] = $_POST["username"];
 	  header('Location: index.php');

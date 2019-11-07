@@ -3,12 +3,17 @@ session_start();
 include 'BD.php';
 $massage = "";
 if (isset($_POST["username"]) && isset($_POST["pass"])) {
-	$user=mysqli_escape_string($con, $_POST["username"]);
-	$pass=mysqli_escape_string($con, $_POST["pass"]);
-	$pass2=hash('sha512', $pass);
 
-	$user_logged = mysqli_query($con, "SELECT * FROM `users` WHERE `username`='$user' AND `password`='$pass2'");
-	if (mysqli_num_rows($user_logged) > 0) { 
+	$stmt = $con->prepare("SELECT * FROM users WHERE username=? AND password=?");
+	$stmt->bind_param("ss", $username, $pass);
+
+	$username = $_POST["username"];
+	$pass = hash('sha512', $_POST["pass"]);
+
+	$stmt->execute();
+	$stmt->store_result();
+
+	if ($stmt->num_rows() > 0) { 
 	    $_SESSION["CURRENT_USER"] = $_POST["username"];
         header('Location: index.php');
 	}

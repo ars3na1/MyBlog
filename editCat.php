@@ -9,22 +9,12 @@ $new_cat = $_POST["editCatNew"]);
 $stmt = $con->prepare("UPDATE `blog articles` SET `category` = ? WHERE `category` = ?");
 $stmt->bind_param('ss', $new_cat, $old_cat);
 $stmt->execute();
-
 	
-	if($stmt->affected_rows($con)) {
+    if($stmt->affected_rows($con)) {
 		header('Location: index.php');
 	}
 }
-
 ?>
-	
-	if(mysqli_affected_rows($con)) {
-		header('Location: index.php');
-	}
-}
-
-?>
-
 
 <html>
 	<head>

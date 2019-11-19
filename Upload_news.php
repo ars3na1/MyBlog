@@ -9,14 +9,20 @@ if (isset($_POST["title"]) || isset($_POST["text"]) || isset($_POST["category"])
 	$massage = "News upload is not succesful, please try again";
 } 
 if (isset($_POST["title"]) && isset($_POST["text"]) && isset($_POST["category"]) && isset($_FILES['picture'])){
-$title = mysqli_escape_string($con, $_POST["title"]);
-$text = mysqli_escape_string($con, $_POST["text"]);
-$category = mysqli_escape_string($con, $_POST["category"]); 
+$title = $_POST["title"];
+$text = $_POST["text"];
+$category = $_POST["category"]; 
 
 	if (strlen($_POST["title"]) > 0 && strlen($_POST["text"]) > 0 && strlen($_POST["category"]) > 0){
-$upload_news = mysqli_query($con, "INSERT INTO `blog articles` (`title`, `text`, `category`) VALUES ('$title', '$text', '$category')");
-$result = mysqli_query($con, "SELECT `ID` FROM `blog articles` ORDER BY `last edited` DESC LIMIT 1");
-$res = mysqli_fetch_assoc($result);
+$stmt = $con->prepare("INSERT INTO `blog articles` (`title`, `text`, `category`) VALUES (?, ?, ?)");
+$stmt->bind_param('sss', $title, $text, $category);
+$stmt->execute();
+$stmt->close();
+
+$stmt = $con->prepare("SELECT `ID` FROM `blog articles` ORDER BY `last edited` DESC LIMIT 1");
+$stmt->execute();
+$result = $stmt->get_result();
+$res = $result->fetch_assoc();
 $picId = $res['ID'];
 $artId = $res['ID'];
 	}
@@ -86,7 +92,8 @@ $artId = $res['ID'];
 			}
 			if(is_string($massage) && strlen($massage) > 0) {
 				echo '<p class = massage>' . $massage . '</p>';
-			} ?>
+			} 
+			?>
 		</form>
 		</div>
 	</body>

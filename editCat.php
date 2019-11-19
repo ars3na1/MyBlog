@@ -3,10 +3,11 @@ error_reporting(E_ALL & ~E_NOTICE);
 include 'BD.php';
 
 if(isset($_POST["editCatOld"]) && isset($_POST["editCatNew"])) {
-$old_cat = mysqli_escape_string($con, $_POST["editCatOld"]);
-$new_cat = mysqli_escape_string($con, $_POST["editCatNew"]);
+$old_cat = $_POST["editCatOld"]);
+$new_cat = $_POST["editCatNew"]);
 
-$category_change=mysqli_query($con, "UPDATE `blog articles` SET `category` = '$new_cat' WHERE `category` = '$old_cat'");
+$stmt = $con->prepare("UPDATE `blog articles` SET `category` = ? WHERE `category` = ?");
+
 	
 	if(mysqli_affected_rows($con)) {
 		header('Location: index.php');

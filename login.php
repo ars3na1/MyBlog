@@ -4,7 +4,7 @@ include 'BD.php';
 $massage = "";
 if (isset($_POST["username"]) && isset($_POST["pass"])) {
 
-	$stmt = $con->prepare("SELECT * FROM users WHERE username=? AND password=?");
+	$stmt = $con->prepare("SELECT * FROM users WHERE username = ? AND password = ?");
 	$stmt->bind_param("ss", $username, $pass);
 
 	$username = $_POST["username"];

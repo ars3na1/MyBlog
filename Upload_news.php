@@ -8,26 +8,12 @@ $artId = 0;
 if (isset($_POST["title"]) || isset($_POST["text"]) || isset($_POST["category"])) {
 	$massage = "News upload is not succesful, please try again";
 } 
-if (isset($_POST["title"]) && isset($_POST["text"]) && isset($_POST["category"]) && isset($_FILES['picture'])){
+if (isset($_POST["title"]) && isset($_POST["text"]) && isset($_POST["category"]) && isset($_FILES['picture'])) {
 $title = $_POST["title"];
 $text = $_POST["text"];
 $category = $_POST["category"]; 
 
-	if (strlen($_POST["title"]) > 0 && strlen($_POST["text"]) > 0 && strlen($_POST["category"]) > 0){
-$stmt = $con->prepare("INSERT INTO `blog articles` (`title`, `text`, `category`) VALUES (?, ?, ?)");
-$stmt->bind_param('sss', $title, $text, $category);
-$stmt->execute();
-$stmt->close();
-
-$stmt = $con->prepare("SELECT `ID` FROM `blog articles` ORDER BY `last edited` DESC LIMIT 1");
-$stmt->execute();
-$result = $stmt->get_result();
-$res = $result->fetch_assoc();
-$picId = $res['ID'];
-$artId = $res['ID'];
-	}
-	if (isset($_FILES['picture'])) {
-	$error_types = array(	
+$error_types = array (	
     1 => 'The uploaded file exceeds the upload_max_filesize directive in php.ini.',
     2 => 'The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form.',
     3 => 'The uploaded file was only partially uploaded.',
@@ -50,10 +36,22 @@ $artId = $res['ID'];
 	} else if($ext_error === true) {
 		$picMassage = "Invalid file extension! Only .jpg pictures allowed.";
 	} else {
-	move_uploaded_file($_FILES['picture']['tmp_name'], 'artPictures/' . $picId . '.' . $file_ext);
+		if (strlen($_POST["title"]) > 0 && strlen($_POST["text"]) > 0 && strlen($_POST["category"]) > 0) {
+    move_uploaded_file($_FILES['picture']['tmp_name'], 'artPictures/' . $picId . '.' . $file_ext);
+$stmt = $con->prepare("INSERT INTO `blog articles` (`title`, `text`, `category`) VALUES (?, ?, ?)");
+$stmt->bind_param('sss', $title, $text, $category);
+$stmt->execute();
+$stmt->close();
+
+$stmt = $con->prepare("SELECT `ID` FROM `blog articles` ORDER BY `last edited` DESC LIMIT 1");
+$stmt->execute();
+$result = $stmt->get_result();
+$res = $result->fetch_assoc();
+$picId = $res['ID'];
+$artId = $res['ID'];
+	}	
 		header('Location: article.php?id=' . $artId);
 	}
-  }
 }
 	
 ?>

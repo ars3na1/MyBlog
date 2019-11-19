@@ -6,13 +6,14 @@ $massage = "";
 if(isset($_POST["pass"]) || isset($_POST["username"])){
   $massage = "Username is already taken or your password confirmation is wrong!";
 }
-if(strlen($_POST["pass"]) > 0 && strlen($_POST["username"]) > 0 && $_POST["pass"] == $_POST["cpass"]) {
+if(strlen($_POST["pass"]) > 0 && strlen($_POST["username"]) > 0 && $_POST["pass"] === $_POST["cpass"]) {
+
   $stmt = $con->prepare("INSERT INTO users (`username`, `password`) VALUES (?, ?)");
   $stmt->bind_param("ss", $username, $pass);
-
   $username = $_POST["username"];
   $pass = hash('sha512', $_POST["pass"]);
   $stmt->execute();
+
   if (mysqli_affected_rows($con) > 0) {
   	$_SESSION["CURRENT_USER"] = $_POST["username"];
 	  header('Location: index.php');
@@ -27,6 +28,27 @@ if(strlen($_POST["pass"]) > 0 && strlen($_POST["username"]) > 0 && $_POST["pass"
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="assets\style.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript">
+			$(document).ready(function() {
+				$("#pass").keypress(function() {
+					var a = $("#pass").val();
+					var pass = a.trim();
+					if(pass.length <= 6 ) {
+						$("#lengthCheck").css("visibility", "visible");					
+				} else {
+						$("#lengthCheck").css("visibility", "hidden");
+				}})
+						$("#cpass").keypress(function() {
+							var b = $('input[name="cpass"]').val();
+							var str = b.trim();
+							if (str.length > 6 ) {
+								$("#signInButton").prop("disabled", false);
+							} else {
+								$("#signInButton").prop("disabled", true);
+							}
+						})
+					})
+		</script>
 	<style type="text/css">
 		#container {
 			background: none;
@@ -63,25 +85,5 @@ if(strlen($_POST["pass"]) > 0 && strlen($_POST["username"]) > 0 && $_POST["pass"
 			} ?>
 			</form>
 		</div>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#pass").keypress(function() {
-					if($(this).val().length <= 6 ) {
-						$("#lengthCheck").css("visibility", "visible");
-					} else {
-						$("#lengthCheck").css("visibility", "hidden");
-						$("#cpass").keypress(function() {
-							var str = $('input[name="cpass"]').val();
-							var str = str.trim();
-							if (str.length > 7 ) {
-								$("#signInButton").prop("disabled", false);
-							} else {
-								$("#signInButton").prop("disabled", true);
-							}
-						})	
-					}
-				})
-			})
-		</script>
 </body>
 </html>

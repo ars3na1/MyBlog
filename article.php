@@ -1,17 +1,30 @@
 <?php
-
 require_once 'BD.php';
-$id = mysqli_escape_string($con, $_GET["id"]);
+$article2 = array();
+$title = "";
+$text = "";
+$id = $_GET['id'];
 
-$get_comment = mysqli_query($con, "SELECT `name`, `comment` FROM `loremipsum_comments` WHERE `id`='$id'");
-$text = mysqli_query($con, "SELECT `title`,`text` FROM `blog articles` WHERE `id`='$id'");
-$article = mysqli_fetch_assoc($text);
+$stmt = $con->prepare("SELECT `title`, `text` FROM `blog articles` WHERE `id` = ? ");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+$article = $result->fetch_assoc();	
+$stmt->close();
+
+$stmt = $con->prepare("SELECT `name`, `comment` FROM `loremipsum_comments` WHERE `id` = ? ");
+$stmt->bind_param("i", $id);
+$id = $_GET["id"];
+$stmt->execute();
+$result = $stmt->get_result();
+
 
 ?>
 <html>
 	<head>
 		<title>
-			<?php echo $article['title'];
+			<?php
+			echo $article['title'];
 		?>
 		</title>
 		<meta charset="utf-8">
@@ -78,7 +91,7 @@ $article = mysqli_fetch_assoc($text);
 		?>
 				</h1>
 				<div id="article">
-				<?php echo $article['text'];
+				<?php echo $article['text'];;
 				?>
 				</div>
 			</article>
@@ -89,10 +102,10 @@ $article = mysqli_fetch_assoc($text);
 			<input type="submit" value="Confirm">
 			</form>
 				<?php 
-				while($row=mysqli_fetch_assoc($get_comment))
+				while($row = $result->fetch_assoc())
 				{
-				echo '<span class="commentName">'.$row['name']. ':'.'</span>
-	<div class="comments">'.$row['comment'].'</div>';
+				echo '<span class="commentName">' . $row['name'] .  ':' . '</span>
+	<div class="comments">' . $row['comment'] . '</div>';
 				} 
 		?>
 			</aside>

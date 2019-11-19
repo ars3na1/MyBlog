@@ -1,29 +1,30 @@
 <?php
 error_reporting(E_ALL & ~E_NOTICE);
 include 'BD.php';
-$category=mysqli_query($con, "SELECT DISTINCT  `Category` FROM `blog articles`");
+
+$id = $_GET['id'];
 $defCat = $_GET['category'];
-$a = mysqli_escape_string($con, $_GET['id']);
 
-$get_art = mysqli_query($con, "SELECT `title`,`text` FROM `blog articles` WHERE `id` = '$a'");
-
-$b = mysqli_fetch_assoc($get_art);
+$stmt = $con->prepare("SELECT `title`, `text` FROM `blog articles` WHERE `id` = ?");
+$stmt->bind_param('i', $id);
+$stmt->execute();
+$a = $stmt->get_result();
+$art = $a->fetch_assoc();
+$stmt->close();
 
 if(isset($_GET["id"]) && isset($_POST["editTitle"]) && isset($_POST["editText"]) && isset($_POST["editCategory"]) ) {
-$ArtID = mysqli_escape_string($con, $_GET["id"]);
-$new_art_title = mysqli_escape_string($con, $_POST["editTitle"]);
-$new_art_text = mysqli_escape_string($con, $_POST["editText"]);
-$new_cat = mysqli_escape_string($con, $_POST["editCategory"]);
-
-$article_edit=mysqli_query($con, "UPDATE `blog articles` SET `title` = '$new_art_title', `text` = '$new_art_text', `Category` = '$new_cat' WHERE `id` = '$ArtID'");
+	$stmt = $con->prepare("UPDATE `blog articles` SET `title` = ?, `text` = ?, `Category` = ? WHERE `id` = ?");
+	$stmt->bind_param('sssi', $_POST["editTitle"], $_POST["editText"], $_POST["editCategory"], $id);
+	$stmt->execute();
 	
 	if(mysqli_affected_rows($con)) {
-		header('Location: article.php?id='.$a);
+		header('Location: article.php?id=' . $id);
 	}
 }
-
+$stmt = $con->prepare("SELECT DISTINCT  `Category` FROM `blog articles`");
+$stmt->execute();
+$category = $stmt->get_result();
 ?>
-
 
 <html>
 	<head>
@@ -58,17 +59,19 @@ $article_edit=mysqli_query($con, "UPDATE `blog articles` SET `title` = '$new_art
 		<div id="container">
 			<header><h2>Edit article</h2></header>
 			<nav><a href="index.php"><img class="linkImages" src="assets\home.jpg"></a></nav>
-			<form id="editArticle" method="post" action="editArt.php?id=<?php echo $a?>">
-				<p class="paragraph">Title:</p> <input class="smallText textCenter" type="text" name="editTitle" value="<?php echo $b['title']?>">
+			<form id="editArticle" method="post" action="editArt.php?id=<?php echo $id?>">
+				<p class="paragraph">Title:</p> <input class="smallText textCenter" type="text" name="editTitle" value="<?php echo $art['title']?>">
 				<p class="paragraph">Category:</p>
 				<select name="editCategory" value="<?php echo $defCat?>">
-<?php while ($cat = mysqli_fetch_assoc($category))  {
+<?php while ($cat = $category->fetch_assoc())  {
 	echo '<option value="' . $cat['Category'] . '"'; 
 	if ($defCat == $cat['Category']) echo "selected"; 
 	echo '>' . $cat['Category'] . '</option>';
-}?>
+}
+$stmt->close();
+?>
 </select> 
-				<p class="paragraph">Text:</p> <textarea class="mainText" name="editText"><?php echo $b['text']?></textarea><br>
+				<p class="paragraph">Text:</p> <textarea class="mainText" name="editText"><?php echo $art['text']?></textarea><br>
 				<input class="button" type="submit" value="Confirm">
 			</form>
 		</div>

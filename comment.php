@@ -1,9 +1,11 @@
 <?php
 include 'BD.php';
-$name = mysqli_escape_string($con, $_POST["user_name"]);
-$comment = mysqli_escape_string($con, $_POST["comment"]);
-$id = mysqli_escape_string($con, $_GET["id"]);
+$name = $_POST["user_name"];
+$comment = $_POST["comment"];
+$id = $_GET["id"];
 
-$comment_input=mysqli_query($con, "INSERT INTO `loremipsum_comments` (`name`, `comment`, `id`) VALUES ('$name', '$comment', '$id')");
+$stmt = $con->prepare("INSERT INTO `loremipsum_comments` (`name`, `comment`, `id`) VALUES (?, ?, ?)");
+$stmt->bind_param('ssi', $name, $comment, $id);
+$stmt->execute();
 
-header('Location: article.php?id='.$id);
+header('Location: article.php?id=' . $id);

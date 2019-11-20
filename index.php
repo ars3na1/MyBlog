@@ -1,19 +1,19 @@
 <?php
 session_start();
 include 'BD.php';
-
-$result=mysqli_query($con, 'SELECT `title`,`text`,`id` FROM `blog articles`');
+$stmt = $con->prepare('SELECT `title`,`text`,`id` FROM `blog articles`');
+$stmt->execute();
+$result = $stmt->get_result();
 
 $articles = [];
-while($art=mysqli_fetch_assoc($result)){
+while($art = $result->fetch_assoc()){
 	$articles[] = [
 		'title' => $art['title'],
 		'text' => $art['text'],
 		'id' => $art['id'],
 	];
 }
-
-$kol=mysqli_query($con, "SELECT DISTINCT  `Category` FROM `blog articles`");
+$stmt->close();
 ?>
 
 <html>
@@ -38,7 +38,6 @@ function checkDelete(){
 			max-height: 800px;
 			overflow: auto;
 			margin: 20px auto;
-
 			}
 		li {
 			display: inline-block;
@@ -63,7 +62,7 @@ function checkDelete(){
 </head>
 
 <body>
-<div id="container">	
+  <div id="container">	
 	<header><h2> My personal blog </h2></header>
 	<nav><ul>
 		<li><a href="index.php"><img class="linkImages" src="assets\home.jpg"></a></li>
@@ -95,14 +94,19 @@ function checkDelete(){
 <?php 
 if(isset($_GET["Category"])) 
 {
-	$id = mysqli_escape_string($con, $_GET["Category"]);
-	$result_home = mysqli_query($con, "SELECT * FROM `blog articles` WHERE `Category`='$id' ORDER BY `last edited` DESC");
+	$id = $_GET["Category"];
+	$stmt = $con->prepare("SELECT * FROM `blog articles` WHERE `Category`= ? ORDER BY `last edited` DESC");
+	$stmt->bind_param('s', $id);
+	$stmt->execute();
+	$result = $stmt->get_result();
 }
 else 
 {
-	$result_home = mysqli_query($con, 'SELECT * FROM `blog articles` ORDER BY `last edited` DESC');
+	$stmt = $con->prepare('SELECT * FROM `blog articles` ORDER BY `last edited` DESC');
+	$stmt->execute();
+	$result = $stmt->get_result();
 }
-while($row = mysqli_fetch_assoc($result_home)) 
+while($row = $result->fetch_assoc()) 
 {
 	echo '<tr>
 	<td>' . $row['Category'] . '</td>
@@ -116,7 +120,8 @@ while($row = mysqli_fetch_assoc($result_home))
 	<td><a href="delete.php?id=' . $row['ID'] . '" onclick="return checkDelete()"><img class="deleteButton" src="assets\delete.jpg"></a></td>
 	</tr>';
 	}
-} 
+}
+$stmt->close(); 
 ?>
 	</table>
 	
@@ -127,7 +132,12 @@ while($row = mysqli_fetch_assoc($result_home))
 		}
 		?>
 	</tr>
-		<?php while($cat = mysqli_fetch_assoc($kol)) {
+		<?php 
+		$stmt = $con->prepare("SELECT DISTINCT  `Category` FROM `blog articles`");
+		$stmt->execute();
+		$category = $stmt->get_result();
+
+		while($cat = $category->fetch_assoc()) {
 	echo '<tr>
 	<td><a href="index.php?Category=' . $cat['Category'] . '">' . $cat['Category'] . '</a></td>';
 	if (isset($_SESSION["CURRENT_USER"])) {
@@ -137,8 +147,9 @@ while($row = mysqli_fetch_assoc($result_home))
 	}
 	 
 }
+$stmt->close();
 ?>
 
-</div>
-</body>
+    </div>
+  </body>
 </html>

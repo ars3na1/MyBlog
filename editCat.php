@@ -3,8 +3,8 @@ error_reporting(E_ALL & ~E_NOTICE);
 include 'BD.php';
 
 if(isset($_POST["editCatOld"]) && isset($_POST["editCatNew"])) {
-$old_cat = $_POST["editCatOld"]);
-$new_cat = $_POST["editCatNew"]);
+$old_cat = $_POST["editCatOld"];
+$new_cat = $_POST["editCatNew"];
 
 $stmt = $con->prepare("UPDATE `blog articles` SET `category` = ? WHERE `category` = ?");
 $stmt->bind_param('ss', $new_cat, $old_cat);
